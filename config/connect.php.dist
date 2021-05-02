@@ -1,0 +1,10 @@
+<?php
+
+return array(
+	'type' => ,
+	'host' => ,
+	'dbname' => ,
+	'charset'=> ,
+	'login' => "",
+	'password' => ""
+);

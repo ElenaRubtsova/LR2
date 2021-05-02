@@ -1,0 +1,22 @@
+{
+    "name": "highlogical/myhost",
+    "description": "it is package for lab 2 Web",
+    "type": "project",
+    "license": "propritary",
+    "authors": [
+        {
+            "name": "Elena Rubtsova",
+            "email": "elena.rub2000@gmail.com"
+        }
+    ],
+    "require": {
+
+    },
+    "autoload": {
+        "psr-4": {
+                "lib\\DB\\": "lib/DB"
+            },
+        "files": [
+        ]
+    }
+}

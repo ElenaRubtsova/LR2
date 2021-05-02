@@ -1,0 +1,10 @@
+config/connect.php
+/public/upload/*
+.idea
+*.phar
+.php_cs.cache
+.DS_Store
+Thumbs.db
+*.sql
+*.xml
+*.txt
