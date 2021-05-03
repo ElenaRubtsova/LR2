@@ -22,11 +22,6 @@ class ComposerStaticInitfa5cb37304b6dc3ca58d314a8f088825
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'lib\\DB\\DB' => __DIR__ . '/../..' . '/lib/DB/DB.php',
-        'lib\\DB\\One' => __DIR__ . '/../..' . '/lib/DB/One.php',
-        'lib\\DB\\Request' => __DIR__ . '/../..' . '/lib/DB/Request.php',
-        'lib\\DB\\Two' => __DIR__ . '/../..' . '/lib/DB/Two.php',
-        'lib\\DB\\User' => __DIR__ . '/../..' . '/lib/DB/User.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
