@@ -16,11 +16,11 @@ class User extends DB
 		$fquery = $query->fetch(PDO::FETCH_ASSOC);
 		if($fquery == null)
 		{
-			exit("Такая электронная почта в базе не найдена");
+			return "Такая электронная почта в базе не найдена";
 		}
 		if (!password_verify($password,$fquery['password']))
 		{
-			exit("Пароль неверный");
+			return "Пароль неверный";
 		}
 		$_SESSION['id'] = $fquery['id'];
 		$_SESSION['login'] = $fquery['name'];
@@ -36,7 +36,7 @@ class User extends DB
 		if ($query->fetchColumn() != null)
 		{
 			$this->db = null;
-			exit("Такой почтовый адрес уже есть в системе");
+			return "Такой почтовый адрес уже есть в системе";
 		}
 		$stm = $this->db->prepare("INSERT INTO user
 			(name,email,password)

@@ -2,18 +2,26 @@
 
 require_once("header.php");
 require '../vendor/autoload.php';
+require '../lib/function.php';
 
 use lib\DB\Request;
 
+if(!isset($_GET["id"])){
+	err("Данные не получены");
+}
+$id = $_GET["id"];
+
 $req = new Request();
-$stm = $req->view();
+$stm = $req->view($id);
 
 function out($param) {
 	return "<p>" . htmlentities($param, ENT_QUOTES, 'UTF-8'). "</p>";
 }
-
 while($row = $stm->fetch()) {
-	echo out($row->name)
+	if ($_SESSION['id'] != $row->id_user) {
+		err("Запись пользователю не принадлежит");
+	}
+	echo out($row->name).out($row->id_user)
 	. out($row->info)
 	. out($row->subject)
 	. out($row->description);

@@ -1,5 +1,0 @@
-db:
-    host: WebLR2
-    login: mysql
-    password: mysql
-    name: lab_2
