@@ -1,32 +1,35 @@
 <?php
 
-require_once("header.php");
+require_once("../vendor/autoload.php");
+require_once("../lib/function.php");
+
+use lib\DB\User;
 
 $post = filter_var_array($_POST, FILTER_SANITIZE_STRING);
 if ($post['password']!=$post['passwordrep'])
 {
-	exit("<p>Пароли не совпали</p>");
+	hderr("Пароли не совпали");
 }
 if (strlen($post['password'])<6)
 {
-	exit("<p>Пароль слишком короткий: нужно ввести минимум 6 символов</p>");
+	hderr("Пароль слишком короткий: нужно ввести минимум 6 символов");
 }
 if (ctype_digit($post['password']))
 {
-	exit("<p>Пароль не должен состоять только из цифр</p>");
+	hderr("Пароль не должен состоять только из цифр");
 }
 if(!preg_match('/^[а-яё -]++$/ui',$post['name']))
 {
-	exit ("<p>Имя пользователя введено неверно: допустимы только русские буквы, пробелы и дефисы</p>");
+	hderr("Имя пользователя введено неверно: допустимы только русские буквы, пробелы и дефисы");
 }
 $name = $post['name'];
 $email = filter_var($post['email'], FILTER_SANITIZE_EMAIL);
 $password = $post['password'];
 
-require_once("../vendor/autoload.php");
-
-use lib\DB\User;
-
 $db = new User();
-$db->registrate($name, $email, $password);
+$error = $db->registrate($name, $email, $password);
+if($error) {
+	hderr($error);
+}
+
 header('Location: index.php');

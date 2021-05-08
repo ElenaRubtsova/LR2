@@ -5,20 +5,19 @@ require_once("../config/admin.php");
 
 use lib\DB\Request;
 
-$request = new Request();
-
+if ($_SESSION['id'] == null): ?>
+  <h2>Главная страница</h2><br>
+  <p class="bd-lead">
+Добро пожаловать!<br>Сайт предназначен для докладчиков конференций.</p><p> Вы докладчик? Тогда нажмите на кнопку Авторизация вверху страницы. Потребуется ввести почту и пароль.</p><p>Вы впервые оказались на этом сайте? Перейдите по ссылке с надписью Регистрация и внимательно заполните все приведённые поля.</p>
+<?php else:
+  $request = new Request();
   if ($_SESSION['login'] == $login):
     $array = $request->all();
   else:
-    $ref = 'form-add-request.php';
+    ?><button type="button" class="btn btn-default"><a href='form-add-request.php'>Добавить заявку</a></button><?
     $array = $request->by_id($_SESSION['id']);
-  endif;?>
-<html>
-<body>
-<h2>Главная страница</h2>
-<?php if ($_SESSION['id']==null): ?>
-  Добро пожаловать! Сайт предназначен для докладчиков конференций. Вы докладчик? Тогда нажмите на кнопку Авторизация вверху страницы. Потребуется ввести почту и пароль. Вы впервые оказались на этом сайте? Перейдите по ссылке с надписью Регистрация и внимательно заполните все приведённые поля.<br>
-<?php else: ?>
+  endif;
+ ?>
   <h2>Список заявок</h2>
   <table id="requestTable" class="table table-striped" cellspacing="0" width="100%">
   <thead>
@@ -44,10 +43,9 @@ $request = new Request();
     . "</td><td>" .htmlentities($v['subject'], ENT_QUOTES, 'UTF-8')
     . "</td><td>" .htmlentities($v['description'], ENT_QUOTES, 'UTF-8')
     . "</td></tr>";
-    echo "</tbody>";
-  }
-echo "<a href='$ref'>Добавить заявку</a><br>";
-endif;
- ?>
-</body>
-</html>
+  }?>
+  </tbody>
+<? endif;
+require_once("body.php");
+?>
+
